@@ -1,0 +1,11 @@
+setup.py
+to_be_adopted/__init__.py
+to_be_adopted/asgi.py
+to_be_adopted/settings.py
+to_be_adopted/urls.py
+to_be_adopted/wsgi.py
+to_be_adopted.egg-info/PKG-INFO
+to_be_adopted.egg-info/SOURCES.txt
+to_be_adopted.egg-info/dependency_links.txt
+to_be_adopted.egg-info/requires.txt
+to_be_adopted.egg-info/top_level.txt
