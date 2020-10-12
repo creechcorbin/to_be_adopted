@@ -4,17 +4,18 @@ from to_be_adopted.settings import AUTH_USER_MODEL
 
 # Create your models here.
 
+
 class Pet(models.Model):
-  PET_CHOICES = [
+    PET_CHOICES = [
       ('DOG', 'Dog'),
       ('CAT', 'Cat'),
-  ]
-  
-  ADOPTION_CHOICES = [
+        ]
+
+    ADOPTION_CHOICES = [
       (1, "Up For Adoption"),
       (2, "Adopted"),
-  ]
-  
+        ]
+
   name = models.CharField(max_length=80)
   age = models.IntegerField()
   pet_type = models.CharField(

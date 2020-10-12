@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'tbauser',
     'pets',
-    'authentication'
+    'authentication',
 ]
 
 MIDDLEWARE = [
