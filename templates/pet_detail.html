@@ -1,0 +1,29 @@
+{% include 'base.html' %}
+
+{% block content %}
+    <div>
+        <h2>Name: {{ selected_pet.name }}</h2>
+        <img src='{{ selected_pet.pet_image.url }}' height=300px width=300px >
+        <h2>Age: {{ selected_pet.age }}</h2>
+        <h2>About: {{ selected_pet.bio }}</h2>
+
+        {% if selected_pet.spayed_or_neutered == True %}
+            <h2>Spayed/Neutered: Yes</h2>
+        {% else %}
+            <h2>Spayed/Neutered: No</h2>
+        {% endif %}
+
+        {% if selected_pet.shot_record == True %}
+            <h2>Shots up to Date: Yes</h2>
+        {% else %}
+            <h2>Shots up to Date: No</h2>
+        {% endif %}
+
+        {% if selected_pet.status == 'TBA' %}
+            <h2>Availability: To Be Adopted</h2>
+        {% else %}
+            <h2>Availability: Now Officially Adopted</h2>
+        {% endif %}
+        <button><a href='/user/{{ selected_pet.owner.id }}'>Contact Owner!</a></button>
+    </div>
+{% endblock %}
