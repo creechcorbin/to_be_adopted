@@ -9,12 +9,12 @@ class Pet(models.Model):
     PET_CHOICES = [
       ('DOG', 'Dog'),
       ('CAT', 'Cat'),
-        ]
+    ]
 
     ADOPTION_CHOICES = [
       (1, "Up For Adoption"),
       (2, "Adopted"),
-        ]
+    ]
 
   name = models.CharField(max_length=80)
   age = models.IntegerField()
