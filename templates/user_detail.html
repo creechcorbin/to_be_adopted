@@ -1,11 +1,17 @@
-<div>
-    <h1>{{ selected_user.username }}'s Profile</h1>
-    {% if selected_user.account_type == "AD" %}
-        <h2>Adopter</h2>
-    {% else %}
-        <h2>Shelter/Rescue</h2>
-    {% endif %}
-    <h3>Display Name: {{ selected_user.display_name }}</h3>
-    <h4>About: {{ selected_user.bio }}</h4>
-    <h4>Email: {{ selected_user.email }}</h4>
-</div>
+{% include 'base.html' %}
+
+
+{% block content %}
+    <div>
+        <h1>{{ selected_user.display_name }}'s Profile</h1>
+        {% if selected_user.account_type == "AD" %}
+            <h2>Adopter</h2>
+        {% else %}
+            <h2>Shelter/Rescue</h2>
+        {% endif %}
+        <h3>Username: {{ selected_user.username }}</h3>
+        <h4>About: {{ selected_user.bio }}</h4>
+        <h4>Email: {{ selected_user.email }}</h4>
+    </div>
+{% endblock %}
+
