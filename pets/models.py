@@ -6,15 +6,15 @@ from to_be_adopted.settings import AUTH_USER_MODEL
 
 
 class Pet(models.Model):
-    PET_CHOICES = [
-      ('DOG', 'Dog'),
-      ('CAT', 'Cat'),
-        ]
+  PET_CHOICES = [
+    ('DOG', 'Dog'),
+    ('CAT', 'Cat'),
+      ]
 
-    ADOPTION_CHOICES = [
-      (1, "Up For Adoption"),
-      (2, "Adopted"),
-        ]
+  ADOPTION_CHOICES = [
+    ('TBA', "To Be Adopted"),
+    ('NOA', "Now Officially Adopted"),
+      ]
 
   name = models.CharField(max_length=80)
   age = models.IntegerField()
@@ -24,8 +24,8 @@ class Pet(models.Model):
   bio = models.TextField()
   spayed_or_neutered = models.BooleanField(default=False)
   shot_record = models.BooleanField(default=False)
-  status = models.CharField(max_length=2, blank=True,
-                            choices=ADOPTION_CHOICES, default=1)
+  status = models.CharField(max_length=3, blank=True,
+                            choices=ADOPTION_CHOICES, default='TBA')
   pet_image = models.ImageField(null=True, blank=True)
   owner = models.ForeignKey(AUTH_USER_MODEL, related_name='owner', on_delete=models.CASCADE, null=True)
   
