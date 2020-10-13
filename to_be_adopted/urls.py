@@ -14,11 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 from django.conf.urls.static import static
 from django.conf import settings
 
+from tbauser.urls import urlpatterns as user_urls
+from pets.urls import urlpatterns as pet_urls
 # from pets import urls as petsurls
 
 from pets import views as pet_views
@@ -34,5 +36,9 @@ urlpatterns = [
     path('apply/', app_views.pet_app_form_view, name="app_form"),
 ]
 
-# urlpatterns += petsurls
+urlpatterns += user_urls
+urlpatterns += pet_urls
+
+
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

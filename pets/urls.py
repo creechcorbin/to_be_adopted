@@ -1,9 +1,7 @@
 from django.urls import path
 
-from pets import views
+from pets import views as pet_views
 
 urlpatterns = [
-    path('favorite/<int:id>/', views.favorites_pets),
-    path('adopted/', views.sort_adopted),
-    path('unadopted/', views.sort_up_for_adoption),
+    path('pet/<int:pet_id>/', pet_views.pet_detail_view, name='user_detail'),
 ]
