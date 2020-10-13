@@ -19,11 +19,20 @@ from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
 
-from pets import urls as petsurls
+# from pets import urls as petsurls
+
+from pets import views as pet_views
+from applications import views as app_views
+
 
 urlpatterns = [
+    path('', pet_views.index, name="homepage"),
     path('admin/', admin.site.urls),
+    path('favorite/<int:id>/', pet_views.favorites_pets),
+    path('adopted/', pet_views.sort_adopted),
+    path('unadopted/', pet_views.sort_up_for_adoption),
+    path('apply/', app_views.pet_app_form_view, name="app_form"),
 ]
 
+# urlpatterns += petsurls
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-urlpatterns += petsurls
