@@ -1,5 +1,7 @@
-from django.shortcuts import render, HttpResponseRedirect
-
+from django.shortcuts import render, HttpResponseRedirect, reverse
+from .forms import AddPetForm
+from django.views.generic.base import TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from pets.models import Pet
 
 # Create your views here.
@@ -11,7 +13,7 @@ from pets.models import Pet
 
 def index(request):
     all_pets = Pet.objects.all()
-    return render(request, "pets.html", {'pets': all_pets})
+    return render(request, "homepage.html", {'pets': all_pets})
 
 def pet_detail_view(request, pet_id):
     selected_pet = Pet.objects.get(id=pet_id)
@@ -34,3 +36,30 @@ def sort_adopted(request):
 def sort_up_for_adoption(request):
     data = Pet.objects.filter(status=1)
     return render(request, "pets.html" , {'data': data})
+
+class CreatePetProfile(LoginRequiredMixin, TemplateView):
+
+    def get(self, request):
+        form = AddPetForm()
+        return render(request, 'generic_form.html', {'form': form })
+
+    def post(self, request):
+        if request.user.account_type == "SR":
+            form = AddPetForm(request.POST)
+            if form.is_valid():
+                data = form.cleaned_data
+                profile = Pet.objects.create(
+                    name=data.get("name"),
+                    age=data.get("age"),
+                    pet_type=data.get('pet_type'),
+                    bio=data.get('bio'),
+                    spayed_or_neutered=data.get('spayed_or_neutered'),
+                    shot_record=data.get('shot_record'),
+                    status=data.get('status'),
+                    pet_image=data.get('pet_image'),
+                    owner=request.user
+                )
+                profile.save()
+                return HttpResponseRedirect(reverse('homepage'))
+            else:
+                return render(request, 'generic_form.html', {'form': form })

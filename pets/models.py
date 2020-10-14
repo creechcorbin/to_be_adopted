@@ -26,7 +26,7 @@ class Pet(models.Model):
   shot_record = models.BooleanField(default=False)
   status = models.CharField(max_length=3, blank=True,
                             choices=ADOPTION_CHOICES, default='TBA')
-  pet_image = models.ImageField(null=True, blank=True)
+  pet_image = models.ImageField(blank=False, null=True)
   owner = models.ForeignKey(AUTH_USER_MODEL, related_name='owner', on_delete=models.CASCADE, null=True)
   
   def __str__(self):

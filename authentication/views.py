@@ -1,18 +1,23 @@
 from django.shortcuts import render, HttpResponseRedirect, reverse
 from django.contrib.auth import login, logout, authenticate
+from django.views.generic.base import TemplateView
 from tbauser.models import AdoptUser
 from pets.models import Pet
 from tbauser.forms import AdoptUserCreationForm
 from authentication.forms import LoginForm, SignupForm
-
 
 def index(request):
     pets = Pet.objects.all()
     return render (request, 'index.html', {'pets': pets})
 
 
-def signup_view(request):
-    if request.method == 'POST':
+class SignupView(TemplateView):
+    
+    def get(self, request):
+        form = SignupForm()
+        return render(request, 'generic_form.html', {'form': form})
+
+    def post(self, request):
         form = SignupForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
@@ -24,9 +29,8 @@ def signup_view(request):
             )
             login(request, new_user)
             return HttpResponseRedirect(reverse('homepage'))
-
-    form = SignupForm()
-    return render(request, 'generic_form.html', {'form': form})
+        else:
+            return render(request, 'generic_form.html', {'form': form})
 
 
 def login_view(request):
