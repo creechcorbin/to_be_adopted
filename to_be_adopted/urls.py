@@ -19,9 +19,7 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 
-<<<<<<< HEAD
 from authentication.urls import urlpatterns as authurls
-=======
 from tbauser.urls import urlpatterns as user_urls
 from pets.urls import urlpatterns as pet_urls
 # from pets import urls as petsurls
@@ -29,7 +27,6 @@ from pets.urls import urlpatterns as pet_urls
 from pets import views as pet_views
 from applications import views as app_views
 
->>>>>>> 8ef446b2341b24677fcdfb1d6a079468374fde5f
 
 urlpatterns = [
     path('', pet_views.index, name="homepage"),
@@ -40,14 +37,10 @@ urlpatterns = [
     path('apply/', app_views.pet_app_form_view, name="app_form"),
 ]
 
-<<<<<<< HEAD
 urlpatterns += authurls
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-=======
 urlpatterns += user_urls
 urlpatterns += pet_urls
 
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
->>>>>>> 8ef446b2341b24677fcdfb1d6a079468374fde5f
