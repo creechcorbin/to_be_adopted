@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'pets',
     'authentication',
     'applications',
+    'notifications',
 ]
 
 MIDDLEWARE = [
