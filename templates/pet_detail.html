@@ -1,7 +1,7 @@
 {% include 'base.html' %}
 
 {% block content %}
-    <div>
+    <div class="container">
         <h2>Name: {{ selected_pet.name }}</h2>
         <img src='{{ selected_pet.pet_image.url }}' height=300px width=300px >
         <h2>Age: {{ selected_pet.age }}</h2>
