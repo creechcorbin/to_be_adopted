@@ -1,7 +1,23 @@
-<h1>To Be Adopted</h1>
-<br>
-{% if user.is_authenticated %}
-    <h3>Logged In</h3>
-{% else %}
-    <h3>Not Logged In</h3>
-{% endif %}
+{% include 'base.html' %}
+
+{% block content %}
+
+    {% if request.user.is_authenticated %}
+        <h1>Welcome to ToBeAdopted, {{ request.user.display_name}}!</h1>
+    {% else %}
+        <h1>Welcome to ToBeAdopted, Guest!</h1>
+    {% endif %}
+
+    <h2 ALIGN='center'>Pets to be Adopted!</h2>
+    <hr>
+    
+    {% for pet in pets %}
+        <div class='pet'>
+            <img src='{{ pet.pet_image.url }}' height=200px width=200px>
+            <br>                
+            <a href='/pet/{{ pet.id }}/' >{{ pet.name }}</a>
+            <br>
+        </div>
+    {% endfor %}
+
+{% endblock %}

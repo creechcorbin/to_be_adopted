@@ -11,9 +11,6 @@ from pets.models import Pet
 # Add reverse inside of HTTPRedirect
 # Add html part to filter functions
 
-def index(request):
-    all_pets = Pet.objects.all()
-    return render(request, "homepage.html", {'pets': all_pets})
 
 def pet_detail_view(request, pet_id):
     selected_pet = Pet.objects.get(id=pet_id)

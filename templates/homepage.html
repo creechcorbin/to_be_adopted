@@ -1,6 +1,0 @@
-{% include 'base.html' %} {% block content %} 
-{% if request.user.is_authenticated %}
-<h1>Welcome to ToBeAdopted, {{ request.user.display_name}}!</h1>
-{% else %}
-<h1>Welcome to ToBeAdopted, Guest!</h1>
-{% endif %} {% endblock %}
