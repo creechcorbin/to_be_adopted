@@ -19,7 +19,7 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 
-from authentication.urls import urlpatterns as auth_urls
+from authentication.urls import urlpatterns as authurls
 from tbauser.urls import urlpatterns as user_urls
 from pets.urls import urlpatterns as pet_urls
 
@@ -35,7 +35,7 @@ urlpatterns = [
     path('apply/', app_views.pet_app_form_view, name="app_form"),
 ]
 
-urlpatterns += auth_urls
+urlpatterns += authurls
 urlpatterns += user_urls
 urlpatterns += pet_urls
 
