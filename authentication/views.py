@@ -16,7 +16,7 @@ class SignupView(TemplateView):
     
     def get(self, request):
         form = SignupForm()
-        return render(request, 'generic_form.html', {'form': form})
+        return render(request, 'signup.html', {'form': form})
 
     def post(self, request):
         form = SignupForm(request.POST)
@@ -31,7 +31,7 @@ class SignupView(TemplateView):
             login(request, new_user)
             return HttpResponseRedirect(reverse('homepage'))
         else:
-            return render(request, 'generic_form.html', {'form': form})
+            return render(request, 'signup.html', {'form': form})
 
 
 def login_view(request):
@@ -49,7 +49,7 @@ def login_view(request):
                 return HttpResponseRedirect(request.GET.get('next', reverse("homepage")))
                 
     form = LoginForm()
-    return render(request, "generic_form.html", {"form": form})
+    return render(request, "login.html", {"form": form})
 
 
 def logout_view(request):
