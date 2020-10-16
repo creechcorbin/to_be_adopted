@@ -1,0 +1,19 @@
+{% include 'base.html' %} {% block content %} 
+<div class="container">
+{% if request.user.is_authenticated %}
+<h1>Welcome to ToBeAdopted, {{ request.user.display_name}}!</h1>
+{% else %}
+<h1>Welcome to ToBeAdopted, Guest!</h1>
+{% endif %}
+<ul class="list-group">
+{% for pet in pets %}
+    <li class="list-group-item">
+        <img src='{{ pet.pet_image.url }}' height=200px width=200px >
+        <p>Hi! I'm <a href="/pet/{{pet.id}}/">{{pet.name}}</a></p>
+        <p>I'm a/an {{ pet.age }} year old {{pet.pet_type}}.</p>
+        <a href="/pet/{{pet.id}}/">See more info about me!</a>
+    </li>
+{% endfor %}
+</ul>
+</div>
+{% endblock %}

@@ -9,7 +9,7 @@ from authentication.forms import LoginForm, SignupForm
 
 def index_view(request):
     pets = Pet.objects.all()
-    return render (request, 'index.html', {'pets': pets})
+    return render (request, 'homepage.html', {'pets': pets})
 
 
 class SignupView(TemplateView):

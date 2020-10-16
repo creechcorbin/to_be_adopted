@@ -17,6 +17,40 @@ def pet_detail_view(request, pet_id):
     
     return render(request, 'pet_detail.html', {'selected_pet': selected_pet})
 
+
+def edit_pet_view(request, pet_id):
+    selected_pet = Pet.objects.get(id=pet_id)
+
+    if request.method == 'POST':
+        form = AddPetForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            name = data['name']
+            age = data['age']
+            pet_type = data['pet_type']
+            bio = data['bio']
+            spayed_or_neutered = data['spayed_or_neutered']
+            shot_record = data['shot_record']
+            status = data['status']
+            pet_image = data['pet_image']
+        return HttpResponseRedirect(reverse('pet_detail', args=[selected_pet.id]))
+    
+    data = {
+        'name': selected_pet.name,
+        'age': selected_pet.age,
+        'pet_type': selected_pet.pet_type,
+        'bio': selected_pet.bio,
+        'spayed_or_neutered': selected_pet.spayed_or_neutered,
+        'shot_record': selected_pet.shot_record,
+        'status': selected_pet.status,
+        'pet_image': selected_pet.pet_image,
+    }
+
+    form = AddPetForm(initial=data)
+
+    return render(request, 'edit_pet.html', {'form': form})
+
+
 def favorites_pets(request, id):
     pet = Pet.objects.get(id=id)
     current_user = request.user
@@ -27,12 +61,13 @@ def favorites_pets(request, id):
 
 def sort_adopted(request):
     data = Pet.objects.filter(status=2)
-    return render(request, "pets.html", {'data': data})
+    return render(request, "homepage.html", {'data': data})
 
 
 def sort_up_for_adoption(request):
     data = Pet.objects.filter(status=1)
-    return render(request, "pets.html" , {'data': data})
+    return render(request, "homepage.html" , {'data': data})
+
 
 class CreatePetProfile(LoginRequiredMixin, TemplateView):
 

@@ -20,22 +20,43 @@
     <!-- Navigation -->
     <nav class="navbar navbar-dark bg-dark">
       <a class="navbar-brand" href="/">ToBeAdopted</a>
+      {% if request.user.is_authenticated %}
+      
       <div class="navbar-text">
         <ul class="nav justify-content-end">
           <li class="nav-item">
-            <a class="nav-link" href="#">Pets</a>
+            <a class="nav-link" href="/">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Rescues/Shelters</a>
+            <a class="nav-link" href="#">Notifications</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Sign Up</a>
+            <a class="nav-link" href="/user/{{request.user.id}}/">Profile</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Log In</a>
+            <a class="nav-link" href="/logout/">Log Out</a>
           </li>
         </ul>
       </div>
+      {% else %}
+      <div class="navbar-text">
+        <ul class="nav justify-content-end">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          {% comment %} <li class="nav-item">
+            <a class="nav-link" href="#">Rescues/Shelters</a>
+          </li> {% endcomment %}
+          <li class="nav-item">
+            <a class="nav-link" href="/signup/">Sign Up</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/login/">Log In</a>
+          </li>
+        </ul>
+      </div>
+      {% endif %}
+    
     </nav>
 
     <!-- Container for Content and Pages -->

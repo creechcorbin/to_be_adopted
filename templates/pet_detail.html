@@ -1,7 +1,7 @@
 {% include 'base.html' %}
 
 {% block content %}
-    <div>
+    <div class="container">
         <h2>Name: {{ selected_pet.name }}</h2>
         <img src='{{ selected_pet.pet_image.url }}' height=300px width=300px >
         <h2>Age: {{ selected_pet.age }}</h2>
@@ -24,6 +24,12 @@
         {% else %}
             <h2>Availability: Now Officially Adopted</h2>
         {% endif %}
+
+        <h2>{{ selected_pet.post_date }}</h2> 
         <button><a href='/user/{{ selected_pet.owner.id }}'>Contact Owner!</a></button>
+
+        {% if request.user == selected_pet.owner %}
+            <button><a href='/pet/edit/{{ selected_pet.id }}/'>Edit</a></button>
+        {% endif %}
     </div>
 {% endblock %}
