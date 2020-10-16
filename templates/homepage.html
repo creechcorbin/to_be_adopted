@@ -8,6 +8,7 @@
 <ul class="list-group">
 {% for pet in pets %}
     <li class="list-group-item">
+        <img src='{{ pet.pet_image.url }}' height=200px width=200px >
         <p>Hi! I'm <a href="/pet/{{pet.id}}/">{{pet.name}}</a></p>
         <p>I'm a/an {{ pet.age }} year old {{pet.pet_type}}.</p>
         <a href="/pet/{{pet.id}}/">See more info about me!</a>

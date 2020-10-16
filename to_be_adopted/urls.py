@@ -22,14 +22,12 @@ from django.conf import settings
 from authentication.urls import urlpatterns as authurls
 from tbauser.urls import urlpatterns as user_urls
 from pets.urls import urlpatterns as pet_urls
-# from pets import urls as petsurls
 
 from pets import views as pet_views
 from applications import views as app_views
 
 
 urlpatterns = [
-    path('', pet_views.index, name="homepage"),
     path('admin/', admin.site.urls),
     path('favorite/<int:id>/', pet_views.favorites_pets),
     path('adopted/', pet_views.sort_adopted),

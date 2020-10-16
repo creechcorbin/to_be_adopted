@@ -24,6 +24,12 @@
         {% else %}
             <h2>Availability: Now Officially Adopted</h2>
         {% endif %}
+
+        <h2>{{ selected_pet.post_date }}</h2> 
         <button><a href='/user/{{ selected_pet.owner.id }}'>Contact Owner!</a></button>
+
+        {% if request.user == selected_pet.owner %}
+            <button><a href='/pet/edit/{{ selected_pet.id }}/'>Edit</a></button>
+        {% endif %}
     </div>
 {% endblock %}

@@ -6,9 +6,10 @@ from pets.models import Pet
 from tbauser.forms import AdoptUserCreationForm
 from authentication.forms import LoginForm, SignupForm
 
-def index(request):
+
+def index_view(request):
     pets = Pet.objects.all()
-    return render (request, 'index.html', {'pets': pets})
+    return render (request, 'homepage.html', {'pets': pets})
 
 
 class SignupView(TemplateView):
