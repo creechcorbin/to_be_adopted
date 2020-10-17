@@ -3,6 +3,7 @@ from .forms import AddPetForm
 from django.views.generic.base import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from pets.models import Pet
+from notifications.models import Notification
 
 # Create your views here.
 
@@ -55,6 +56,11 @@ def favorites_pets(request, id):
     pet = Pet.objects.get(id=id)
     current_user = request.user
     current_user.favorites.add(pet)
+    owner = pet.owner
+    notification = Notification.object.create(
+        owner_of_favorited=owner,
+        favorited_pet=pet
+        )
 
     return HttpResponseRedirect('homepage')
 
