@@ -2,20 +2,18 @@ from django.shortcuts import render, HttpResponseRedirect, reverse
 from .forms import AddPetForm
 from django.views.generic.base import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
+
 from pets.models import Pet
 from notifications.models import Notification
 
-# Create your views here.
 
-# Similiar to GhostPost filter boasts/roasts
-
-# Add reverse inside of HTTPRedirect
-# Add html part to filter functions
-
-
+@login_required
 def pet_detail_view(request, pet_id):
-    selected_pet = Pet.objects.get(id=pet_id)
-    
+    try:
+        selected_pet = Pet.objects.get(id=pet_id)
+    except Pet.DoesNotExist:
+        return render(request, "404.html", status=404)
     return render(request, 'pet_detail.html', {'selected_pet': selected_pet})
 
 
@@ -35,7 +33,7 @@ def edit_pet_view(request, pet_id):
             status = data['status']
             pet_image = data['pet_image']
         return HttpResponseRedirect(reverse('pet_detail', args=[selected_pet.id]))
-    
+
     data = {
         'name': selected_pet.name,
         'age': selected_pet.age,
@@ -62,7 +60,7 @@ def favorites_pets(request, id):
         favorited_pet=pet
         )
 
-    return HttpResponseRedirect('homepage')
+    return HttpResponseRedirect(reverse('homepage'))
 
 
 def sort_adopted(request):
