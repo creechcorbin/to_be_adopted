@@ -22,9 +22,11 @@ from django.conf import settings
 from authentication.urls import urlpatterns as authurls
 from tbauser.urls import urlpatterns as user_urls
 from pets.urls import urlpatterns as pet_urls
+from notifications.urls import urlpatterns as notif_urls
 
 from pets import views as pet_views
 from applications import views as app_views
+
 
 
 urlpatterns = [
@@ -38,6 +40,7 @@ urlpatterns = [
 urlpatterns += authurls
 urlpatterns += user_urls
 urlpatterns += pet_urls
+urlpatterns += notif_urls
 
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

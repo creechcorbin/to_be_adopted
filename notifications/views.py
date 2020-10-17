@@ -4,12 +4,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
 from tbauser.models import AdoptUser
 from pets.models import Pet
-from notifications.models import notifications
+from notifications.models import Notification
 
 
-@login_required
+
 class NotificationView(LoginRequiredMixin, TemplateView):
-    def get(self, request):
+    def get(self, request, *args, **kwargs):
         user = request.user
         owner_notifications = Notification.objects.filter(owner_of_favorited=user)
         count = 0
@@ -20,9 +20,10 @@ class NotificationView(LoginRequiredMixin, TemplateView):
                 notification_list.append(notification.favorited_pet)
                 notification.seen == True
                 notification.save()
-        return render(request, 'notifications.html', {'owner_of_favorited': notification_list, 'count': count})
+        return render(request, 'notifications.html', {'owner_notifications': owner_notifications, 'notification_list': notification_list, 'count': count})
 
 
+# Don't think we actually need this, but leaving it here for now.
 class NotificationCountView(TemplateView):
     def get(self, request):
         user = request.user
