@@ -3,15 +3,15 @@ from django.db import models
 from pets.models import Pet 
 
 # Create your models here.
- 
- 
+
+
 class AdoptUser(AbstractUser):
- 
+
    USER_CHOICES = [
        ('AD', 'Adopter'),
        ('SR', 'Shelter/Rescue'),
    ]
- 
+
    display_name = models.CharField(max_length=50)
    bio = models.TextField()
    account_type = models.CharField(
