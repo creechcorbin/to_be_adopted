@@ -1,4 +1,4 @@
-#!/Users/corbincreech/Kenzie-Projects/to-be-adopted/.venv/bin/python
+#!/Users/justin/q4-kenzie-folder/to_be_adopted/.venv/bin/python3
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 

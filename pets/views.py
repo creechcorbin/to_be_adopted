@@ -6,15 +6,25 @@ from django.contrib.auth.decorators import login_required
 
 from pets.models import Pet
 from notifications.models import Notification
+from tbauser.models import AdoptUser
 
 
 @login_required
 def pet_detail_view(request, pet_id):
+    selected_pet = Pet.objects.get(id=pet_id)
     try:
-        selected_pet = Pet.objects.get(id=pet_id)
+        selected_pet 
     except Pet.DoesNotExist:
         return render(request, "404.html", status=404)
-    return render(request, 'pet_detail.html', {'selected_pet': selected_pet})
+    
+    current_user = request.user
+    favorited_pet = False
+    user_favs = current_user.favorites.all()
+    for pet in user_favs:
+        if pet == selected_pet:
+            favorited_pet = True
+    
+    return render(request, 'pet_detail.html', {'selected_pet': selected_pet, 'favorited_pet': favorited_pet})
 
 
 def edit_pet_view(request, pet_id):
@@ -50,17 +60,32 @@ def edit_pet_view(request, pet_id):
     return render(request, 'edit_pet.html', {'form': form})
 
 
-def favorites_pets(request, id):
-    pet = Pet.objects.get(id=id)
+def favorite_pet(request, pet_id):
+    selected_pet = Pet.objects.get(id=pet_id)
     current_user = request.user
-    current_user.favorites.add(pet)
-    owner = pet.owner
-    notification = Notification.object.create(
+    current_user.favorites.add(selected_pet)
+    owner = selected_pet.owner
+    notification = Notification.objects.create(
         owner_of_favorited=owner,
-        favorited_pet=pet
+        favorited_pet=selected_pet
         )
 
     return HttpResponseRedirect(reverse('homepage'))
+    
+
+def unfavorite_pet(request, pet_id):
+    selected_pet = Pet.objects.get(id=pet_id)
+    current_user = request.user
+    current_user.favorites.remove(selected_pet)
+
+    return HttpResponseRedirect(reverse('homepage'))
+
+
+def favorites_view(request, user_id):
+    current_user = AdoptUser.objects.get(id=user_id)
+    user_favs = current_user.favorites.all()
+
+    return render(request, "favorites.html", {'current_user': current_user, 'user_favs': user_favs})
 
 
 def sort_adopted(request):

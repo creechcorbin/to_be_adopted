@@ -12,29 +12,23 @@ class NotificationView(LoginRequiredMixin, TemplateView):
     def get(self, request, *args, **kwargs):
         user = request.user
         owner_notifications = Notification.objects.filter(owner_of_favorited=user)
-        count = 0
+        notif_count = 0
+        fav_count = 0
         notification_list = []
+        prev_favorited_list = []
         for notification in owner_notifications:
             if notification.seen == False:
-                count += 1
+                notif_count += 1
                 notification_list.append(notification.favorited_pet)
-                notification.seen == True
+                notification.seen = True
                 notification.save()
-        return render(request, 'notifications.html', {'owner_notifications': owner_notifications, 'notification_list': notification_list, 'count': count})
+            else:
+                fav_count += 1
+                prev_favorited_list.append(notification.favorited_pet)
+  
+        return render(request, 'notifications.html', {'notification_list': notification_list, 'notif_count': notif_count, 'prev_favorited_list': prev_favorited_list, 'fav_count': fav_count})
 
 
-# Don't think we actually need this, but leaving it here for now.
-class NotificationCountView(TemplateView):
-    def get(self, request):
-        user = request.user
-        if user.is_authenticated:
-            notifications = Notification.objects.filter(owner_of_favorited=user)
-            count = 0
-            for notification in notifications:
-                if notification.seen == False:
-                    count += 1
-        else:
-            count = 0
-        return count
+
 
 
