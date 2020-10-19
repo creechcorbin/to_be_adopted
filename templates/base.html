@@ -27,9 +27,15 @@
           <li class="nav-item">
             <a class="nav-link" href="/">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/notifications/">Notifications</a>
-          </li>
+          {% if request.user.account_type == "SR" %}
+            <li class="nav-item">
+              <a class="nav-link" href="/notifications/">Notifications</a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="/favorites/{{request.user.id}}/">Favorites</a>
+            </li>
+          {% endif %}
           <li class="nav-item">
             <a class="nav-link" href="/user/{{request.user.id}}/">Profile</a>
           </li>

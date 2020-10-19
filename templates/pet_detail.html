@@ -27,7 +27,11 @@
 
         <h2>{{ selected_pet.post_date }}</h2> 
         <button><a href='/user/{{ selected_pet.owner.id }}'>Contact Owner!</a></button>
-
+        {% if favorited_pet == True %}
+            <button><a href='/unfavorite/{{ selected_pet.id }}/'>Remove From Favorites</a></button>
+        {% else %}
+            <button><a href='/favorite/{{ selected_pet.id }}/'>Favorite</a></button>
+        {% endif %}
         {% if request.user == selected_pet.owner %}
             <button><a href='/pet/edit/{{ selected_pet.id }}/'>Edit</a></button>
         {% endif %}

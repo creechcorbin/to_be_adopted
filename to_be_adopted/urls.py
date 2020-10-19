@@ -31,7 +31,6 @@ from applications import views as app_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('favorite/<int:id>/', pet_views.favorites_pets),
     path('adopted/', pet_views.sort_adopted),
     path('unadopted/', pet_views.sort_up_for_adoption),
     path('apply/', app_views.pet_app_form_view, name="app_form"),

@@ -1,0 +1,15 @@
+{% include 'base.html' %}
+
+{% block content %}
+    <h1>{{ current_user.display_name }}'s Favorites</h1>
+    <ul class="list-group">
+        {% for fav in user_favs %}
+            <li class="list-group-item">
+                <img src="{{ fav.pet_image.url }}" height=200px width=200px >
+                <p>Hi! I'm <a href="/pet/{{fav.id}}/">{{fav.name}}</a></p>
+                <p>I'm a/an {{ fav.age }} year old {{fav.pet_type}}.</p>
+                <a href="/pet/{{fav.id}}/">See more info about me!</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock  %}
