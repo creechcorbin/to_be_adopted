@@ -19,5 +19,10 @@ class AddPetForm(forms.Form):
     spayed_or_neutered = forms.BooleanField()
     shot_record = forms.BooleanField()
     status = forms.ChoiceField(choices=ADOPTION_CHOICES)
-    pet_image = forms.ImageField(required=False)
+    pet_image = forms.ImageField()
 
+class EditPet(forms.ModelForm):
+    class Meta:
+        model = Pet
+        fields = "__all__"
+        exclude = ['owner', 'pet_image']

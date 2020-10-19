@@ -1,33 +1,63 @@
-{% include 'base.html' %}
-
-{% block content %}
-    <h1>Notifications for {{ request.user.display_name }}</h1>
-    {% if notification_list %}
-        <h3>You have {{ notif_count }} pets recently added to someone's notificationorites!</h3>
-        <ul class="list-group">
-            {% for notification in notification_list %}
-                <li class="list-group-item">
-                    <img src="{{ notification.pet_image.url }}" height=200px width=200px >
-                    <p>Hi! I'm <a href="/pet/{{notification.id}}/">{{notification.name}}</a></p>
-                    <p>I'm a/an {{ notification.age }} year old {{notification.pet_type}}.</p>
-                    <a href="/pet/{{notification.id}}/">See more info about me!</a>
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <h3>You have 0 new notifications at this time...</h3>
-    {% endif %}
-    {% if prev_favorited_list %}
-        <h3>You have {{ fav_count }} previously saved pets in potential adopter's favorites!</h3>
-        <ul class="list-group">
-            {% for fav in prev_favorited_list %}
-                <li class="list-group-item">
-                    <img src="{{ fav.pet_image.url }}" height=200px width=200px >
-                    <p>Hi! I'm <a href="/pet/{{fav.id}}/">{{notification.name}}</a></p>
-                    <p>I'm a/an {{ fav.age }} year old {{fav.pet_type}}.</p>
-                    <a href="/pet/{{notification.id}}/">See more info about me!</a>
-                </li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-{% endblock  %}
+{% include 'base.html' %} {% block content %}
+<div class="container">
+  <h1>Notifications for {{ request.user.display_name }}</h1>
+  {% if notification_list %}
+  <h3>
+    You have {{ notif_count }} pet(s) recently added to someone's favorites!
+  </h3>
+  <ul class="list-group">
+    {% for notification in notification_list %}
+    <li class="list-group-item">
+      <p>Someone has shown interest in {{notification.name}}</p>
+      <div class="row">
+        <div class="col">
+          <img
+            src="{{ notification.pet_image.url }}"
+            height="200px"
+            width="200px"
+          />
+        </div>
+        <div class="col">
+          <p>
+            Hi! I'm
+            <a href="/pet/{{notification.id}}/">{{notification.name}}</a>
+          </p>
+          <p>
+            I'm a/an {{ notification.age }} year old {{notification.pet_type}}.
+          </p>
+          <a href="/pet/{{notification.id}}/">See more info about me!</a>
+        </div>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <h3>You have 0 new notifications at this time...</h3>
+  {% endif %} {% if prev_favorited_list %}
+  <h3>
+    You have {{ fav_count }} previously saved pets in potential adopter's
+    favorites!
+  </h3>
+  <ul class="list-group">
+    {% for fav in prev_favorited_list %}
+    <li class="list-group-item">
+      <p>Someone has shown interest in {{fav.name}}</p>
+      <div class="row">
+        <div class="col">
+          <img src="{{ fav.pet_image.url }}" height="200px" width="200px" />
+        </div>
+        <div class="col">
+          <p>
+            Hi! I'm
+            <a href="/pet/{{fav.id}}/">{{fav.name}}</a>
+          </p>
+          <p>I'm a/an {{ fav.age }} year old {{fav.pet_type}}.</p>
+          <a href="/pet/{{fav.id}}/">See more info about me!</a>
+        </div>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</div>
+{% endblock %}

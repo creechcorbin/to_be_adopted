@@ -1,39 +1,46 @@
-{% include 'base.html' %}
-
-{% block content %}
-    <div class="container">
-        <h2>Name: {{ selected_pet.name }}</h2>
-        <img src='{{ selected_pet.pet_image.url }}' height=300px width=300px >
-        <h2>Age: {{ selected_pet.age }}</h2>
-        <h2>About: {{ selected_pet.bio }}</h2>
-
-        {% if selected_pet.spayed_or_neutered == True %}
-            <h2>Spayed/Neutered: Yes</h2>
-        {% else %}
-            <h2>Spayed/Neutered: No</h2>
-        {% endif %}
-
-        {% if selected_pet.shot_record == True %}
-            <h2>Shots up to Date: Yes</h2>
-        {% else %}
-            <h2>Shots up to Date: No</h2>
-        {% endif %}
-
-        {% if selected_pet.status == 'TBA' %}
-            <h2>Availability: To Be Adopted</h2>
-        {% else %}
-            <h2>Availability: Now Officially Adopted</h2>
-        {% endif %}
-
-        <h2>{{ selected_pet.post_date }}</h2> 
-        <button><a href='/user/{{ selected_pet.owner.id }}'>Contact Owner!</a></button>
-        {% if favorited_pet == True %}
-            <button><a href='/unfavorite/{{ selected_pet.id }}/'>Remove From Favorites</a></button>
-        {% else %}
-            <button><a href='/favorite/{{ selected_pet.id }}/'>Favorite</a></button>
-        {% endif %}
-        {% if request.user == selected_pet.owner %}
-            <button><a href='/pet/edit/{{ selected_pet.id }}/'>Edit</a></button>
-        {% endif %}
+{% include 'base.html' %} {% block content %}
+<div class="container-sm">
+  <h1 style="text-align: center">Name: {{ selected_pet.name }}</h1>
+  <div class="row justify-content-around align-items-center">
+    <div class="col-1">
+      <img
+        src="{{ selected_pet.pet_image.url }}"
+        height="300px"
+        width="300px"
+      />
     </div>
+    <div class="col-auto">
+      <p><b>Age:</b> {{ selected_pet.age }} year(s) old</p>
+      <p><b>About:</b> {{ selected_pet.bio }}</p>
+
+      {% if selected_pet.spayed_or_neutered == True %}
+      <p><b>Spayed/Neutered:</b> Yes</p>
+      {% else %}
+      <p><b>Spayed/Neutered:</b> No</p>
+      {% endif %} {% if selected_pet.shot_record == True %}
+      <p><b>Shots up to Date:</b> Yes</p>
+      {% else %}
+      <p><b>Shots up to Date:</b> No</p>
+      {% endif %} {% if selected_pet.status == 'TBA' %}
+      <p><b>Availability:</b> To Be Adopted</p>
+      {% else %}
+      <p><b>Availability:</b> Now Officially Adopted</p>
+      {% endif %}
+
+      <h4>Added: {{ selected_pet.post_date }}</h4>
+      <button>
+        <a href="/user/{{ selected_pet.owner.id }}">Contact Owner!</a>
+      </button>
+      {% if request.user.account_type == 'AD'%} {% if favorited_pet == True %}
+      <button>
+        <a href="/unfavorite/{{ selected_pet.id }}/">Remove From Favorites</a>
+      </button>
+      {% else %}
+      <button><a href="/favorite/{{ selected_pet.id }}/">Favorite</a></button>
+      {% endif %} {% endif %} {% if request.user == selected_pet.owner %}
+      <button><a href="/pet/edit/{{ selected_pet.id }}/">Edit</a></button>
+      {% endif %}
+    </div>
+  </div>
+</div>
 {% endblock %}

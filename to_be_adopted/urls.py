@@ -32,7 +32,7 @@ from applications import views as app_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('adopted/', pet_views.sort_adopted),
-    path('unadopted/', pet_views.sort_up_for_adoption),
+    path('available/', pet_views.sort_up_for_adoption),
     path('apply/', app_views.pet_app_form_view, name="app_form"),
 ]
 
@@ -41,6 +41,6 @@ urlpatterns += user_urls
 urlpatterns += pet_urls
 urlpatterns += notif_urls
 
-
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
