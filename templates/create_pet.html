@@ -2,15 +2,13 @@
 <div class="container">
   <div class="jumbotron jumbotron-fluid">
     <div class="container">
-      <h1 class="display-4">Edit Your User Profile</h1>
-      <p class="lead">
-        Make changes so that the public pet lovers know who you are.
-      </p>
+      <h1 class="display-4">Add A Pet Profile</h1>
+      <p class="lead">Let's add a new friend for adoption.</p>
     </div>
   </div>
 </div>
 <div class="container">
-  <form action="" method="POST">
+  <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %} {{ form.as_p }}
     <input type="submit" value="Submit" />
   </form>

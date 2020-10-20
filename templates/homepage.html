@@ -1,19 +1,88 @@
-{% include 'base.html' %} {% block content %} 
+{% include 'base.html' %} {% load static %} {% block content %}
+<br />
 <div class="container">
-{% if request.user.is_authenticated %}
-<h1>Welcome to ToBeAdopted, {{ request.user.display_name}}!</h1>
-{% else %}
-<h1>Welcome to ToBeAdopted, Guest!</h1>
-{% endif %}
-<ul class="list-group">
-{% for pet in pets %}
-    <li class="list-group-item">
-        <img src='{{ pet.pet_image.url }}' height=200px width=200px >
-        <p>Hi! I'm <a href="/pet/{{pet.id}}/">{{pet.name}}</a></p>
-        <p>I'm a/an {{ pet.age }} year old {{pet.pet_type}}.</p>
-        <a href="/pet/{{pet.id}}/">See more info about me!</a>
-    </li>
-{% endfor %}
-</ul>
+  <div class="container" style="display: flex; align-items: center">
+    <div
+      id="carouselExampleFade"
+      class="carousel slide carousel-fade shadow-sm"
+      data-ride="carousel"
+      style="height: 250px; width: 1110px"
+    >
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img
+            src="{% static 'images/carousel/carousel1.jpg' %}"
+            class="d-block w-100"
+            alt="..."
+            style="height: 250px; width: 1110px"
+          />
+        </div>
+        <div class="carousel-item">
+          <img
+            src="{% static 'images/carousel/carousel2.jpg' %}"
+            class="d-block w-100"
+            alt="..."
+            height="960px"
+            width="210px"
+            style="height: 250px; width: 1110px"
+          />
+        </div>
+        <div class="carousel-item">
+          <img
+            src="{% static 'images/carousel/carousel3.jpg' %}"
+            class="d-block w-100"
+            alt="..."
+            style="height: 250px; width: 1110px"
+          />
+        </div>
+        <div class="carousel-item">
+          <img
+            src="{% static 'images/carousel/carousel4.jpg' %}"
+            class="d-block w-100"
+            alt="..."
+            style="height: 250px; width: 1110px"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+  <div class="title">
+    <h3 style="text-align: center">Welcome to</h3>
+    <img
+      src="{% static 'images/tba_logo2.png'%}"
+      style="
+        display: block;
+        height: 200px;
+        width: 440px;
+        margin-left: auto;
+        margin-right: auto;
+      "
+    />
+  </div>
+  <hr />
+  <div class="container-fluid align-items-center justify-content-center d-flex">
+    <div class="card-deck">
+      <div class="row row-cols-1 row-cols-md-3">
+        {% for pet in pets %}
+        <div class="col mb-4">
+          <div class="card shadow-sm">
+            <img
+              src="{{ pet.pet_image.url }}"
+              class="card-img-top"
+              height="200px"
+              width="200px"
+            />
+            <div class="card-body">
+              <p>Hi! I'm <a href="/pet/{{pet.id}}/">{{pet.name}}</a></p>
+              <p>I'm a/an {{ pet.age }} year old {{pet.pet_type}}.</p>
+              <a href="/pet/{{pet.id}}/">See more info about me!</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endblock %}
+  </div>
 </div>
-{% endblock %}

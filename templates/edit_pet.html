@@ -1,10 +1,16 @@
-{% include 'base.html' %}
-
-{% block content %}
+{% include 'base.html' %} {% block content %}
+<div class="container">
+  <div class="jumbotron jumbotron-fluid">
     <div class="container">
-        <form action="" method="POST">
-        {% csrf_token %} {{ form.as_p }}
-        <input type="submit" value="Submit" />
-        </form>
+      <h1 class="display-4">Edit Your Pet Profile</h1>
+      <p class="lead">Let's make some changes to your four-legged companion.</p>
     </div>
+  </div>
+</div>
+<div class="container">
+  <form action="" method="POST" style="align-items: flex-start">
+    {% csrf_token %} {{ form.as_p }}
+    <input type="submit" value="Submit" />
+  </form>
+</div>
 {% endblock %}

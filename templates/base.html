@@ -14,59 +14,115 @@
       integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
       crossorigin="anonymous"
     />
-    <title>ToBeAdopted - No Delay in Finding Your Companion Today!</title>
+    <title>To Be Adopted - No Delay in Finding Your Companion Today!</title>
   </head>
-  <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-dark bg-dark">
-      <a class="navbar-brand" href="/">ToBeAdopted</a>
-      {% if request.user.is_authenticated %}
-      
-      <div class="navbar-text">
-        <ul class="nav justify-content-end">
-          <li class="nav-item">
-            <a class="nav-link" href="/">Home</a>
-          </li>
-          {% if request.user.account_type == "SR" %}
+
+  <body style="background-color: #fff3b0">
+    {% load static %}
+    <div class="container">
+      <!-- Navigation -->
+      <nav class="navbar navbar-dark" style="background-color: #823200">
+        <img
+          style="width: 150px; height: 75px"
+          src="{% static 'images/tba_logo.png'%}"
+          alt=""
+        />
+        {% if request.user.is_authenticated %}
+
+        <div class="navbar-text">
+          <ul class="nav justify-content-end align-items-center">
+            <li class="nav-item">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+            {% if request.user.account_type == "SR" %}
             <li class="nav-item">
               <a class="nav-link" href="/notifications/">Notifications</a>
             </li>
-          {% else %}
             <li class="nav-item">
-              <a class="nav-link" href="/favorites/{{request.user.id}}/">Favorites</a>
+              <a class="nav-link" href="/pet/create/">Add A Pet</a>
             </li>
-          {% endif %}
-          <li class="nav-item">
-            <a class="nav-link" href="/user/{{request.user.id}}/">Profile</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/logout/">Log Out</a>
-          </li>
-        </ul>
-      </div>
-      {% else %}
-      <div class="navbar-text">
-        <ul class="nav justify-content-end">
-          <li class="nav-item">
-            <a class="nav-link" href="/">Home</a>
-          </li>
-          {% comment %} <li class="nav-item">
-            <a class="nav-link" href="#">Rescues/Shelters</a>
-          </li> {% endcomment %}
-          <li class="nav-item">
-            <a class="nav-link" href="/signup/">Sign Up</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/login/">Log In</a>
-          </li>
-        </ul>
-      </div>
-      {% endif %}
-    
-    </nav>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="/favorites/{{request.user.id}}/"
+                >Favorites</a
+              >
+            </li>
+            {% endif %}
+            <li class="nav-item">
+              <div class="dropdown">
+                <a
+                  class="btn btn-inherit dropdown-toggle"
+                  role="button"
+                  id="dropdownMenuLink"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  Sort Pets by Status
+                </a>
 
-    <!-- Container for Content and Pages -->
-    <div class="container">{% block content %} {% endblock %}</div>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <a class="dropdown-item text-dark" href="/adopted/"
+                    >Officially Adopted</a
+                  >
+                  <a class="dropdown-item text-dark" href="/available/"
+                    >To Be Adopted</a
+                  >
+                </div>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/user/{{request.user.id}}/">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout/">Log Out</a>
+            </li>
+            <li class="nav-item">Hello, {{request.user.display_name}}!</li>
+          </ul>
+        </div>
+        {% else %}
+        <div class="navbar-text">
+          <ul class="nav justify-content-end">
+            <li class="nav-item">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <div class="dropdown">
+                <a
+                  class="btn btn-inherit dropdown-toggle"
+                  href="#"
+                  role="button"
+                  id="dropdownMenuLink"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  Sort Pets by Status
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <a class="dropdown-item text-dark" href="/adopted/"
+                    >Officially Adopted</a
+                  >
+                  <a class="dropdown-item text-dark" href="/available/"
+                    >To Be Adopted</a
+                  >
+                </div>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/signup/">Sign Up</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/login/">Log In</a>
+            </li>
+          </ul>
+        </div>
+        {% endif %}
+      </nav>
+    </div>
+
+    <div class="container-fluid">{% block content %} {% endblock %}</div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script
