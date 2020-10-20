@@ -4,22 +4,28 @@
   <hr />
   <h2 style="text-align: center">Pets To Be Adopted</h2>
   <hr />
-  <div class="card-deck" style="display: flex; align-items: center">
-    {% for pet in data %}
-    <div class="card shadow-sm">
-      <img
-        src="{{ pet.pet_image.url }}"
-        class="card-img-top"
-        height="200px"
-        width="200px"
-      />
-      <div class="card-body">
-        <p>Hi! I'm <a href="/pet/{{pet.id}}/">{{pet.name}}</a></p>
-        <p>I'm a/an {{ pet.age }} year old {{pet.pet_type}}.</p>
-        <a href="/pet/{{pet.id}}/">See more info about me!</a>
+  <div class="container-fluid align-items-center justify-content-center d-flex">
+    <div class="card-deck">
+      <div class="row row-cols-1 row-cols-md-3">
+        {% for pet in data %}
+        <div class="col mb-4">
+          <div class="card shadow-sm">
+            <img
+              src="{{ pet.pet_image.url }}"
+              class="card-img-top"
+              height="200px"
+              width="200px"
+            />
+            <div class="card-body">
+              <p>Hi! I'm <a href="/pet/{{pet.id}}/">{{pet.name}}</a></p>
+              <p>I'm a/an {{ pet.age }} year old {{pet.pet_type}}.</p>
+              <a href="/pet/{{pet.id}}/">See more info about me!</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
       </div>
     </div>
-    {% endfor %}
   </div>
 </div>
 
